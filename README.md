@@ -22,3 +22,7 @@ bash ./interactive.sh
 If you accidentally leave the script, don't be afraid, the script will save all your scores and you can restart from the same stage.
 
 License: MIT
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/drKraken/interactive-shell/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
