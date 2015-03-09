@@ -6,11 +6,19 @@ Want to learn basic UNIX cmds quickly? Do you prefer learning by doing? Then thi
 
 Follow easy exercises and learn how to use a UNIX terminal by typing valid commands.
 
-Run it easily:
+Run it easily (if you believe me):
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/drKraken/interactive-shell/master/interactive.sh)
 ```
-If you accidentally leave the script, don't be afraid, the script will save all your scores and you can restart from the same stage.
 
+or you can download it, view and then run
+
+```bash
+wget https://raw.githubusercontent.com/drKraken/interactive-shell/master/interactive.sh;
+cat ./interactive.sh
+bash ./interactive.sh
+```
+If you accidentally leave the script, don't be afraid, the script will save all your scores and you can restart from the same stage.
+
 License: MIT
