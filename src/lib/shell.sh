@@ -120,6 +120,7 @@ pwdExercise() {
 	success() {
 		echo "Your path : $(pwd)"
 		success_echo "Nice you made it!"
+		echo "Learn more here: $(link_echo 'http://document.link')"
 		UPDATE "sudoTraining"
 		SAVE_STAT
 		next "sudoTraining"
@@ -171,8 +172,8 @@ mvExercise() {
 
 	success() {
 		mkdir ./testFolder; mv sample.txt ./testFolder
-		echo "Learn about $(term_echo 'mv') more here: $(link_echo 'http://document.link')"
 		success_echo "Yeh. All right!"
+		echo "Learn about $(term_echo 'mv') more here: $(link_echo 'http://document.link')"
 		UPDATE "pwdExercise"
 		SAVE_STAT
 		next "pwdExercise"
@@ -192,6 +193,9 @@ sudoTraining() {
 
 	echo "If you want to run command as a super user you can use $(term_echo 'sudo') command"
 	echo "Let enter a super user mode"
+	error_echo "Note! Don't allow other scripts to use sudo mode. Always use sudo only when it really need!"
+	echo "In our case  dont be afraid, it's only simulation of entering sudo mode. "
+	echo "Learn more here: $(link_echo 'http://document.link')"
 	type_echo "Type 'sudo su'"
 	read -p "  -> " input
 
@@ -225,8 +229,9 @@ dateExercise() {
 	read -p "  -> " input
 
 	success() {
-		success_echo "Yeh. All right!"
 		date && date +'%d/%m/%Y'
+		success_echo "Yeh. All right!"
+		echo "More about $(term_echo 'date') here: $(link_echo 'http://document.link')"
 		UPDATE "finish"
 		SAVE_STAT
 		next "lsTraining"
@@ -245,6 +250,7 @@ lsTraining() {
 	local correct="ls ."
 
 	echo "$(term_echo 'ls') command is used for showing which files current directory have"
+	echo "learn more here: $(link_echo 'http://document.link')"
 	echo "Lets try it"
 	type_echo "Type: ls ."
 	read -p "  -> " input
@@ -253,7 +259,8 @@ lsTraining() {
 		success_echo "Yeh. All right!"
 		ls .
 		echo "If you want to show hidden files you can use flag -a like ls -a . This command will show files with hidden files too"
-		UPDATE "lsTraining"
+		echo "Learn more here: $(link_echo 'http://document.link')"
+		UPDATE "psTraining"
 		SAVE_STAT
 		next "psTraining"
 	}
@@ -303,7 +310,7 @@ nanoTraining() {
 		success_echo "Cool!"
 		nano
 		success_echo "You made it!"
-		UPDATE "nanoTraining"
+		UPDATE "finish"
 		SAVE_STAT
 		next "finish"
 	}
