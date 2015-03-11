@@ -22,4 +22,9 @@ type_echo() {
 	echo -e "\033[0;36m$text\033[0m"
 }
 
+link_echo() {
+	local text=$1
+	echo -e "\033[0;34m$text\033[0m"
+}
+
 # end

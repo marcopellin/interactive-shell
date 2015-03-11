@@ -14,6 +14,7 @@ mkdirExercise() {
 		success_echo "\033[0;32mCongratulations! Now you create your first folder!"
 		echo "$(term_echo 'mkdir') command is used for creating folders"
 		echo "So in our case we created folder with name 'firstFolder'"
+		echo "You can learn more about it here: $(link_echo 'http://document.link')"
 		UPDATE "cdExercise"
 		SAVE_STAT
 		next "cdExercise"
@@ -39,6 +40,8 @@ cdExercise() {
 	success() {
 		cd ./firstFolder
 		success_echo "Cool. Now you in firstFolder, that you created before"
+		echo "$(term_echo 'cd') command used for navigationn from folder to folder"
+		echo "Learn more about it here: $(link_echo 'http://document.link')"
 		UPDATE "touchExercise"
 		SAVE_STAT
 		next "touchExercise"
@@ -62,10 +65,12 @@ touchExercise() {
 
 	success() {
 		success_echo "Cool"
+		echo "$(term_echo 'touch') command is used for creating new files"
+		echo "Learn more here: $(link_echo 'http://document.link')"
 		touch ./sample.txt
-		UPDATE "rmExercise"
+		UPDATE "cpExercise"
 		SAVE_STAT
-		next "rmExercise"
+		next "cpExercise"
 	}
 	error() {
 		restarting "touchExercise"
@@ -78,20 +83,21 @@ touchExercise() {
 rmExercise() {
 
 	local input
-	local correct="rm sample.txt"
+	local correct="rm sample-copy.txt"
 
 	echo "So now you know how to create files and folders"
 	echo "Lets learn how to delete files"
-	echo "Lets delete sample.txt , that we create earlier"
-	type_echo "\033[0;36mType 'rm sample.txt'"
+	echo "Lets delete sample-copy.txt , that we create earlier"
+	type_echo "\033[0;36mType 'rm sample-copy.txt'"
 	read -p "  -> " input
 
 	success() {
 		success_echo "Cool. You made it!"
-		# rm ./sample.txt
-		UPDATE "pwdExercise"
+		echo "Learn more about different flags here: $(link_echo 'http://document.link')"
+		rm ./sample-copy.txt
+		UPDATE "mvExercise"
 		SAVE_STAT
-		next "pwdExercise"
+		next "mvExercise"
 	}
 	error() {
 		restarting "rmExercise"
@@ -114,9 +120,9 @@ pwdExercise() {
 	success() {
 		echo "Your path : $(pwd)"
 		success_echo "Nice you made it!"
-		UPDATE "cpExercise"
+		UPDATE "sudoTraining"
 		SAVE_STAT
-		next "cpExercise"
+		next "sudoTraining"
 	}
 	error() {
 		restarting "pwdExercise"
@@ -137,9 +143,11 @@ cpExercise() {
 	success() {
 		cp sample.txt sample-copy.txt
 		success_echo "Yeh. All right!"
-		UPDATE "mvExercise"
+		echo "$(term_echo 'cp') command is used for copy files"
+		echo "Learn more here: $(link_echo 'http://document.link')"
+		UPDATE "rmExercise"
 		SAVE_STAT
-		next "mvExercise"
+		next "rmExercise"
 	}
 
 	error() {
@@ -156,15 +164,18 @@ mvExercise() {
 
 	echo "Lets try $(term_echo 'mv') command"
 	echo "Lets create new folder and move our file into that"
+	echo "Note, that $(term_echo ';') is used when you want to run next command after first will be finished"
+	echo "Learn more about $(term_echo '&& ; |') here: $(link_echo 'http://document.link')"
 	type_echo "Type 'mkdir testFolder; mv sample.txt ./testFolder'"
 	read -p "  -> " input
 
 	success() {
 		mkdir ./testFolder; mv sample.txt ./testFolder
+		echo "Learn about $(term_echo 'mv') more here: $(link_echo 'http://document.link')"
 		success_echo "Yeh. All right!"
-		UPDATE "sudoTraining"
+		UPDATE "pwdExercise"
 		SAVE_STAT
-		next "sudoTraining"
+		next "pwdExercise"
 	}
 
 	error() {
@@ -207,6 +218,9 @@ dateExercise() {
 
 	echo "$(term_echo 'date') command is used for operate different date formats"
 	echo "Lets learn it"
+	echo "Note, that $(term_echo '&&') is used when you want to run two or more commands in one time"
+	echo "In our case first example will show unformat date and second will show date with special formating"
+	echo "You can learn more about it here : $(link_echo 'http://document.link')"
 	type_echo "Type: date && date +'%d/%m/%Y'"
 	read -p "  -> " input
 
