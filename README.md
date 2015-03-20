@@ -1,5 +1,7 @@
 # Interactive-shell
 
+[![Join the chat at https://gitter.im/drKraken/interactive-shell](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/drKraken/interactive-shell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <img src='http://i61.tinypic.com/n2iwpc.png' width='500' height='290'/>
 
 Want to learn basic UNIX cmds quickly? Do you prefer learning by doing? Then this is for you.
