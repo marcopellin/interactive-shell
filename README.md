@@ -1,4 +1,4 @@
-# Interactive-shell
+# Interactive-shell  [![Build Status](https://travis-ci.org/drKraken/interactive-shell.svg?branch=master)](https://travis-ci.org/drKraken/interactive-shell)
 
 [![Join the chat at https://gitter.im/drKraken/interactive-shell](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/drKraken/interactive-shell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -22,9 +22,15 @@ cat ./interactive.sh
 bash ./interactive.sh
 ```
 If you accidentally leave the script, don't be afraid, the script will save all your scores and you can restart from the same stage.
-
+
+### TODO
+> 
+- Improve code
+- Add testing with Bats
+- Create clean documentation for commands
+- Add more exercises
+- Add script alternative for ```cmd```
+
 License: MIT
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/drKraken/interactive-shell/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+Built by [drKraken](https://github.com/drkraken)
