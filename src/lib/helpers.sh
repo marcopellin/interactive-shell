@@ -2,29 +2,29 @@
 # print success helper
 success_echo() {
 	local text=$1
-	echo -e "\033[0;32m$text\033[0m"
+	echo -e "$GREEN$text$RESET"
 }
 
 # print error message helper
 error_echo() {
 	local text=$1
-	echo -e "\033[0;31m$text\033[0m"
+	echo -e "$ALERT$text$RESET"
 }
 
 # print term message helper
 term_echo() {
 	local text=$1
-	echo -e "\033[1;33m$text\033[0m"
+	echo -e "$YELLOW$text$RESET"
 }
 
 type_echo() {
 	local text=$1
-	echo -e "\033[0;36m$text\033[0m"
+	echo -e "$DARKBLUE$text$RESET"
 }
 
 link_echo() {
 	local text=$1
-	echo -e "\033[0;34m$text\033[0m"
+	echo -e "$LINK$text$RESET"
 }
 
 # end

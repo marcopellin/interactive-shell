@@ -144,7 +144,7 @@ cpExercise() {
 
 	success() {
 		cp sample.txt sample-copy.txt
-		success_echo "Yeh. All right!"
+		success_echo "Yeah. All right!"
 		echo "$(term_echo 'cp') command is used for copy files"
 		echo "Learn more here: $(link_echo 'http://document.link')"
 		UPDATE "rmExercise"
