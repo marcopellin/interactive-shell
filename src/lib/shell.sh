@@ -12,7 +12,26 @@ mkdirExercise() {
 	read -p "  ❯  " input
 
 	success() {
-		mkdir ./firstFolder
+
+		if [ -e "./firstFolder" ]; then
+			error_echo "Seems like you already have folder with such name."
+			echo "Would you like to delete existing 'firstFolder' [Y/n]"
+			read -p " ❯ " choice
+
+			case $choice in
+				y|Y|yes|Yes )
+						rm -r ./firstFolder
+					;;
+				* )
+					rm -r ./firstFolder
+				;;
+			esac
+
+			mkdirExercise
+		else
+			mkdir ./firstFolder
+		fi
+
 		success_echo "Congratulations! Now you create your first folder!"
 		echo "$(term_echo 'mkdir') command is used for creating folders"
 		echo "So in our case we created folder with name 'firstFolder'"
