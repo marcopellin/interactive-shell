@@ -1,25 +1,41 @@
+#
+# Color palette helper
+#
 
+GREEN="\033[0;32m"
+RESET="\033[0m"
+ALERT="\033[0;31m"
+YELLOW="\033[1;33m"
+DARKBLUE="\033[0;36m"
+LINK="\033[0;34m"
+
+#END
 # print success helper
 success_echo() {
 	local text=$1
-	echo -e "\033[0;32m$text\033[0m"
+	echo -e "$GREEN$text$RESET"
 }
 
 # print error message helper
 error_echo() {
 	local text=$1
-	echo -e "\033[0;31m$text\033[0m"
+	echo -e "$ALERT$text$RESET"
 }
 
 # print term message helper
 term_echo() {
 	local text=$1
-	echo -e "\033[1;33m$text\033[0m"
+	echo -e "$YELLOW$text$RESET"
 }
 
 type_echo() {
 	local text=$1
-	echo -e "\033[0;36m$text\033[0m"
+	echo -e "$DARKBLUE$text$RESET"
+}
+
+link_echo() {
+	local text=$1
+	echo -e "$LINK$text$RESET"
 }
 
 # end
@@ -126,13 +142,15 @@ mkdirExercise() {
 	local correct="mkdir firstFolder"
 
 	type_echo "Type 'mkdir firstFolder'"
-	read -p "  -> " input
+
+	read -p "  ❯  " input
 
 	success() {
 		mkdir ./firstFolder
-		success_echo "\033[0;32mCongratulations! Now you create your first folder!"
+		success_echo "Congratulations! Now you create your first folder!"
 		echo "$(term_echo 'mkdir') command is used for creating folders"
 		echo "So in our case we created folder with name 'firstFolder'"
+		echo "You can learn more about it here: $(link_echo 'http://document.link')"
 		UPDATE "cdExercise"
 		SAVE_STAT
 		next "cdExercise"
@@ -142,7 +160,7 @@ mkdirExercise() {
 	}
 
 	checkInput "$input" "$correct" success error
-	
+
 }
 
 # exercise for learning cd
@@ -158,6 +176,8 @@ cdExercise() {
 	success() {
 		cd ./firstFolder
 		success_echo "Cool. Now you in firstFolder, that you created before"
+		echo "$(term_echo 'cd') command used for navigation from folder to folder"
+		echo "Learn more about it here: $(link_echo 'http://document.link')"
 		UPDATE "touchExercise"
 		SAVE_STAT
 		next "touchExercise"
@@ -181,10 +201,12 @@ touchExercise() {
 
 	success() {
 		success_echo "Cool"
+		echo "$(term_echo 'touch') command is used for creating new files"
+		echo "Learn more here: $(link_echo 'http://document.link')"
 		touch ./sample.txt
-		UPDATE "rmExercise"
+		UPDATE "cpExercise"
 		SAVE_STAT
-		next "rmExercise"
+		next "cpExercise"
 	}
 	error() {
 		restarting "touchExercise"
@@ -197,20 +219,21 @@ touchExercise() {
 rmExercise() {
 
 	local input
-	local correct="rm sample.txt"
+	local correct="rm sample-copy.txt"
 
 	echo "So now you know how to create files and folders"
 	echo "Lets learn how to delete files"
-	echo "Lets delete sample.txt , that we create earlier"
-	type_echo "\033[0;36mType 'rm sample.txt'"
+	echo "Lets delete sample-copy.txt , that we create earlier"
+	type_echo "\033[0;36mType 'rm sample-copy.txt'"
 	read -p "  -> " input
 
 	success() {
 		success_echo "Cool. You made it!"
-		# rm ./sample.txt
-		UPDATE "pwdExercise"
+		echo "Learn more about different flags here: $(link_echo 'http://document.link')"
+		rm ./sample-copy.txt
+		UPDATE "mvExercise"
 		SAVE_STAT
-		next "pwdExercise"
+		next "mvExercise"
 	}
 	error() {
 		restarting "rmExercise"
@@ -233,9 +256,10 @@ pwdExercise() {
 	success() {
 		echo "Your path : $(pwd)"
 		success_echo "Nice you made it!"
-		UPDATE "cpExercise"
+		echo "Learn more here: $(link_echo 'http://document.link')"
+		UPDATE "sudoTraining"
 		SAVE_STAT
-		next "cpExercise"
+		next "sudoTraining"
 	}
 	error() {
 		restarting "pwdExercise"
@@ -255,10 +279,12 @@ cpExercise() {
 
 	success() {
 		cp sample.txt sample-copy.txt
-		success_echo "Yeh. All right!"
-		UPDATE "mvExercise"
+		success_echo "Yeah. All right!"
+		echo "$(term_echo 'cp') command is used for copy files"
+		echo "Learn more here: $(link_echo 'http://document.link')"
+		UPDATE "rmExercise"
 		SAVE_STAT
-		next "mvExercise"
+		next "rmExercise"
 	}
 
 	error() {
@@ -275,15 +301,18 @@ mvExercise() {
 
 	echo "Lets try $(term_echo 'mv') command"
 	echo "Lets create new folder and move our file into that"
+	echo "Note, that $(term_echo ';') is used when you want to run next command after first will be finished"
+	echo "Learn more about $(term_echo '&& ; |') here: $(link_echo 'http://document.link')"
 	type_echo "Type 'mkdir testFolder; mv sample.txt ./testFolder'"
 	read -p "  -> " input
 
 	success() {
 		mkdir ./testFolder; mv sample.txt ./testFolder
 		success_echo "Yeh. All right!"
-		UPDATE "sudoTraining"
+		echo "Learn about $(term_echo 'mv') more here: $(link_echo 'http://document.link')"
+		UPDATE "pwdExercise"
 		SAVE_STAT
-		next "sudoTraining"
+		next "pwdExercise"
 	}
 
 	error() {
@@ -300,6 +329,9 @@ sudoTraining() {
 
 	echo "If you want to run command as a super user you can use $(term_echo 'sudo') command"
 	echo "Let enter a super user mode"
+	error_echo "Note! Don't allow other scripts to use sudo mode. Always use sudo only when it really need!"
+	echo "In our case  dont be afraid, it's only simulation of entering sudo mode. "
+	echo "Learn more here: $(link_echo 'http://document.link')"
 	type_echo "Type 'sudo su'"
 	read -p "  -> " input
 
@@ -308,7 +340,7 @@ sudoTraining() {
 		UPDATE "dateExercise"
 		SAVE_STAT
 		next "dateExercise"
-		
+
 	}
 
 	error() {
@@ -326,12 +358,16 @@ dateExercise() {
 
 	echo "$(term_echo 'date') command is used for operate different date formats"
 	echo "Lets learn it"
+	echo "Note, that $(term_echo '&&') is used when you want to run two or more commands in one time"
+	echo "In our case first example will show unformat date and second will show date with special formating"
+	echo "You can learn more about it here : $(link_echo 'http://document.link')"
 	type_echo "Type: date && date +'%d/%m/%Y'"
 	read -p "  -> " input
 
 	success() {
-		success_echo "Yeh. All right!"
 		date && date +'%d/%m/%Y'
+		success_echo "Yeh. All right!"
+		echo "More about $(term_echo 'date') here: $(link_echo 'http://document.link')"
 		UPDATE "finish"
 		SAVE_STAT
 		next "lsTraining"
@@ -350,15 +386,17 @@ lsTraining() {
 	local correct="ls ."
 
 	echo "$(term_echo 'ls') command is used for showing which files current directory have"
+	echo "learn more here: $(link_echo 'http://document.link')"
 	echo "Lets try it"
 	type_echo "Type: ls ."
-	read -p "  -> " input
+	read -p " ❯  " input
 
 	success() {
 		success_echo "Yeh. All right!"
 		ls .
 		echo "If you want to show hidden files you can use flag -a like ls -a . This command will show files with hidden files too"
-		UPDATE "lsTraining"
+		echo "Learn more here: $(link_echo 'http://document.link')"
+		UPDATE "psTraining"
 		SAVE_STAT
 		next "psTraining"
 	}
@@ -408,7 +446,7 @@ nanoTraining() {
 		success_echo "Cool!"
 		nano
 		success_echo "You made it!"
-		UPDATE "nanoTraining"
+		UPDATE "finish"
 		SAVE_STAT
 		next "finish"
 	}
@@ -434,7 +472,7 @@ checkInput() {
 	local success=$3
 	local error=$4
 	local correct=$2
-	
+
 
 	if [ "$input" = "$correct" ]; then
 		$success
