@@ -14,13 +14,21 @@ Run it easily (if you believe me):
 bash <(curl -s https://raw.githubusercontent.com/drKraken/interactive-shell/master/interactive.sh)
 ```
 
-or you can download it, view and then run
+or you can download it, view and then run.
 
 ```bash
 wget https://raw.githubusercontent.com/drKraken/interactive-shell/master/interactive.sh;
 cat ./interactive.sh
 bash ./interactive.sh
 ```
+
+Also, you can make it available as a console command
+
+```bash
+curl -L https://raw.githubusercontent.com/drKraken/interactive-shell/master/interactive.sh -o /usr/local/bin/interactive-sh && chmod +x /usr/local/bin/interactive-sh
+```
+and then run it with ``interactive-sh`` command.
+
 If you accidentally leave the script, don't be afraid, the script will save all your scores and you can restart from the same stage.
 
 ### TODO
