@@ -391,14 +391,17 @@ restarting() {
 # inital function
 initialize() {
 
-	echo -e "\033[1;35mHolla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell! \033[0m"
-	echo -e "\033[1;35mDuring series of short tutorials you will learn basics of working with your shell"
-	echo -e "So, Lets start!  \033[0m"
-	echo -e "Type :q when you would like to exit script or :h for view script version  \033[0m"
+	echo -e "$PURPURE\\n  Holla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell!"
+	echo -e "\\n  During series of short tutorials,"
+	echo -e "  You will learn basics of working with your shell"
+	echo -e "\\n  So, Lets start!  $RESET\\n"
+	echo -e "Type :q when you would like to exit script or :h for view script version  $RESET"
 
 	success() {
 		local state=$1
-		success_echo "Resuming latest game state ... "
+		success_echo "\\n ----------------------------------"
+		success_echo "|  Resuming latest game state ...  |"
+		success_echo " ----------------------------------\\n"
 		next "$state"
 	}
 
