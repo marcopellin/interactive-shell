@@ -307,11 +307,12 @@ mvExercise() {
 	local correct="mkdir testFolder; mv sample.txt ./testFolder"
 
 	echo " "
-	echo "Lets try $(term_echo 'mv') command"
-	echo "Lets create new folder and move our file into that"
-	echo "Note, that $(term_echo ';') is used when you want to run next command after first will be finished"
-	echo "Learn more about $(term_echo '&& ; |') here: $(link_echo 'http://document.link')"
-	type_echo "Type 'mkdir testFolder; mv sample.txt ./testFolder'"
+	echo " Lets try $(term_echo 'mv') command"
+	echo " Lets create new folder and move our file into that"
+	echo " Note, that $(term_echo ';') is used when you want to run next command"
+	echo " after first will be finished."
+	echo " Learn more about $(term_echo '&& ; |') here: $(link_echo 'http://document.link')"
+	type_echo " Type 'mkdir testFolder; mv sample.txt ./testFolder'"
 	read -p "  ❯ " input
 
 	success() {
@@ -535,9 +536,9 @@ initialize() {
 
 	success() {
 		local state=$1
-		success_echo "\\n ----------------------------------"
+		success_echo " ----------------------------------"
 		success_echo "|  Resuming latest game state ...  |"
-		success_echo " ----------------------------------\\n"
+		success_echo " ----------------------------------"
 		next "$state"
 	}
 
