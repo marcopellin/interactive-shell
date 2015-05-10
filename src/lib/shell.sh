@@ -7,11 +7,12 @@ mkdirExercise() {
 	local correct="mkdir firstFolder"
 
 	type_echo "Type 'mkdir firstFolder'"
-	read -p "  -> " input
+
+	read -p "  ❯  " input
 
 	success() {
 		mkdir ./firstFolder
-		success_echo "\033[0;32mCongratulations! Now you create your first folder!"
+		success_echo "Congratulations! Now you create your first folder!"
 		echo "$(term_echo 'mkdir') command is used for creating folders"
 		echo "So in our case we created folder with name 'firstFolder'"
 		echo "You can learn more about it here: $(link_echo 'http://document.link')"
@@ -24,7 +25,7 @@ mkdirExercise() {
 	}
 
 	checkInput "$input" "$correct" success error
-	
+
 }
 
 # exercise for learning cd
@@ -40,7 +41,7 @@ cdExercise() {
 	success() {
 		cd ./firstFolder
 		success_echo "Cool. Now you in firstFolder, that you created before"
-		echo "$(term_echo 'cd') command used for navigationn from folder to folder"
+		echo "$(term_echo 'cd') command used for navigation from folder to folder"
 		echo "Learn more about it here: $(link_echo 'http://document.link')"
 		UPDATE "touchExercise"
 		SAVE_STAT
@@ -204,7 +205,7 @@ sudoTraining() {
 		UPDATE "dateExercise"
 		SAVE_STAT
 		next "dateExercise"
-		
+
 	}
 
 	error() {
@@ -253,7 +254,7 @@ lsTraining() {
 	echo "learn more here: $(link_echo 'http://document.link')"
 	echo "Lets try it"
 	type_echo "Type: ls ."
-	read -p "  -> " input
+	read -p " ❯  " input
 
 	success() {
 		success_echo "Yeh. All right!"
@@ -336,7 +337,7 @@ checkInput() {
 	local success=$3
 	local error=$4
 	local correct=$2
-	
+
 
 	if [ "$input" = "$correct" ]; then
 		$success
