@@ -1,5 +1,4 @@
 
-
 # exrcise for learning mkdir
 mkdirExercise() {
 
@@ -14,20 +13,22 @@ mkdirExercise() {
 	success() {
 
 		if [ -e "./firstFolder" ]; then
-			error_echo "Seems like you already have folder with such name."
-			echo "Would you like to delete existing 'firstFolder' [Y/n]"
+			error_echo " Seems like you already have folder with such name. "
+			echo " Would you like to delete existing $(type_echo 'firstFolder') or skip to next challenge? [y/N] "
 			read -p " ❯ " choice
 
 			case $choice in
 				y|Y|yes|Yes )
 						rm -r ./firstFolder
+						mkdirExercise
 					;;
 				* )
-					rm -r ./firstFolder
+					UPDATE "cdExercise"
+					SAVE_STAT
+					next "cdExercise"
 				;;
 			esac
 
-			mkdirExercise
 		else
 			mkdir ./firstFolder
 		fi
@@ -51,6 +52,7 @@ mkdirExercise() {
 # exercise for learning cd
 cdExercise() {
 
+	# CHECK if foder exist
 	local input
 	local correct="cd firstFolder"
 
@@ -81,9 +83,17 @@ touchExercise() {
 	local input
 	local correct="touch sample.txt"
 
+	if [[ $(pwd | grep 'firstFolder') == "" ]]; then
+		cd ./firstFolder
+	fi
+
+
+	local path=$(pwd)
+
 	echo " "
 	echo "Lets create one file in this folder"
-	type_echo "\033[0;36mType 'touch sample.txt'"
+	type_echo "Type 'touch sample.txt'"
+	term_echo "You in: ${path##*/}"
 	read -p "  ❯ " input
 
 	success() {
@@ -106,7 +116,7 @@ touchExercise() {
 rmExercise() {
 
 	local input
-	local correct="rm sample-copy.txt"
+	local correct="rm *cahnges sample-copy.txt"
 
 	echo " "
 	echo "So now you know how to create files and folders"
@@ -362,6 +372,8 @@ next() {
 	$state
 }
 
+# show filtered path
+
 # checking user input
 checkInput() {
 
@@ -404,7 +416,9 @@ finish() {
 restarting() {
 
 	local state=$1
-	error_echo "\033[0;31mUncorrect input. Please, try again\033[0m"
+	error_echo " ----------------------------------"
+	error_echo "| Uncorrect input, please try again |"
+	error_echo " ----------------------------------"
 	$state
 }
 

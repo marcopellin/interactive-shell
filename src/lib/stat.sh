@@ -1,4 +1,6 @@
-
+#
+# This module help to save data to log file && get data from it
+#
 
 # default params
 user="none"
@@ -8,7 +10,7 @@ date="none"
 # construct new user
 CREATE_USER() {
 
-	user="$USER" 
+	user="$USER"
 
 	if [ -e "$1" ]; then
 		user="$1"
@@ -55,10 +57,10 @@ SAVE_STAT() {
 }
 
 READ_LOG() {
-	if [ "$1" ]; then	
+	if [ "$1" ]; then
 		local user=$1
 		local filename="$HOME/.loger-$user.log"
-		if [ -e "$filename" ]; then		
+		if [ -e "$filename" ]; then
 			while read -r line
 			do
 			    txt=$line
