@@ -1,1 +1,2 @@
-Build with love by @drkraken
+Build with love by Oleh Kuchuk
+https://github.com/drkraken
