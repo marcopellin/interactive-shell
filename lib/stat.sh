@@ -49,13 +49,14 @@ SAVE_STAT() {
 
 	local FILE="$HOME/.loger-$user.log"
 	for f in $FILE; do
-		echo "$date" > $FILE
+		echo "$date" > "$FILE"
 		echo "$user" >> "$FILE"
-		echo "$shell" >> $FILE
+		echo "$shell" >> "$FILE"
 		echo "$progress" >> "$FILE"
 	done
 }
 
+# read loger file
 READ_LOG() {
 	if [ "$1" ]; then
 		local user=$1
@@ -91,7 +92,7 @@ CHECK_LOG() {
 
 DELETE_LOG() {
 	local username=$1
-	rm $HOME/.loger-$username.log
+	rm "$HOME"/.loger-"$username".log
 }
 
 # end

@@ -1,5 +1,5 @@
 
-# print success helper
+# print success helpers
 success_echo() {
 	local text=$1
 	echo -e "$GREEN$text$RESET"

@@ -11,7 +11,7 @@ LINK="\033[0;34m"
 PURPURE="\033[1;35m"
 
 #END
-# print success helper
+# print success helpers
 success_echo() {
 	local text=$1
 	echo -e "$GREEN$text$RESET"
@@ -91,13 +91,14 @@ SAVE_STAT() {
 
 	local FILE="$HOME/.loger-$user.log"
 	for f in $FILE; do
-		echo "$date" > $FILE
+		echo "$date" > "$FILE"
 		echo "$user" >> "$FILE"
-		echo "$shell" >> $FILE
+		echo "$shell" >> "$FILE"
 		echo "$progress" >> "$FILE"
 	done
 }
 
+# read loger file
 READ_LOG() {
 	if [ "$1" ]; then
 		local user=$1
@@ -133,11 +134,11 @@ CHECK_LOG() {
 
 DELETE_LOG() {
 	local username=$1
-	rm $HOME/.loger-$username.log
+	rm "$HOME"/.loger-"$username".log
 }
 
 # end
-# exrcise for learning mkdir
+# exrcise for learning mkdir command
 mkdirExercise() {
 
 	local input
@@ -211,7 +212,7 @@ cdExercise() {
 			next "touchExercise"
 		else
 			error_echo "not found folder"
-			echo "Would you like to crete `firstFolder`"
+			echo "Would you like to crete 'firstFolder'"
 			read -p "  ❯  " input;
 		fi
 	}
@@ -233,7 +234,9 @@ touchExercise() {
 	fi
 
 
-	local path=$(pwd)
+	local path
+
+	path=$(pwd)
 
 	echo " "
 	echo "Lets create one file in this folder"

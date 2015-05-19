@@ -1,5 +1,5 @@
 
-# exrcise for learning mkdir
+# exrcise for learning mkdir command
 mkdirExercise() {
 
 	local input
@@ -73,7 +73,7 @@ cdExercise() {
 			next "touchExercise"
 		else
 			error_echo "not found folder"
-			echo "Would you like to crete `firstFolder`"
+			echo "Would you like to crete 'firstFolder'"
 			read -p "  ❯  " input;
 		fi
 	}
@@ -95,7 +95,9 @@ touchExercise() {
 	fi
 
 
-	local path=$(pwd)
+	local path
+
+	path=$(pwd)
 
 	echo " "
 	echo "Lets create one file in this folder"
