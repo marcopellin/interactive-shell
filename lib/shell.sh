@@ -490,7 +490,7 @@ reset-dialog() {
 # inital function
 initialize() {
 
-	echo -e "$PURPURE\\n  Holla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell!"
+	echo -e "$PURPURE\\n  Holla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell v$VERSION!"
 	echo -e "  During series of short tutorials,"
 	echo -e "  You will learn basics of working with your shell"
 	echo -e "  So, Lets start!  $RESET"
