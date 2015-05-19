@@ -24,4 +24,4 @@ inotify() {
 	sudo apt-get install inotify-tools
 }
 
-inotify; shellschec
+inotify; shellcheck
