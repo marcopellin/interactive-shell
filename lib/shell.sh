@@ -1,4 +1,4 @@
-
+VERSION="2.0.0"
 # exrcise for learning mkdir command
 mkdirExercise() {
 
@@ -89,6 +89,22 @@ touchExercise() {
 
 	local input
 	local correct="touch sample.txt"
+
+	if [ ! -e "./firstFolder" ]; then
+		error_echo "Seems like you don't have folder 'firstFolder'"
+		echo "Would you like to create it? [Y|n]"
+		read -p "  ❯ " val
+
+		case $val in
+			n|N )
+					touchExercise
+				;;
+			*)
+					mkdir ./firstFolder;
+					touchExercise
+				;;
+		esac
+	fi
 
 	if [[ $(pwd | grep 'firstFolder') == "" ]]; then
 		cd ./firstFolder
@@ -391,17 +407,45 @@ checkInput() {
 	local error=$4
 	local correct=$2
 
-	# maybe case ?
-	if [ "$input" = "$correct" ]; then
-		$success
-	elif [ "$input" = ":q" ]; then
-		echo -e "\033[0mExit script..."
-		exit 0;
-	elif [ "$input" = ":h" ]; then
-		echo -e "\033[0mauthor: Oleh Kuchuk version: 1.0"
-	else
-		$error
-	fi
+	case $input in
+		"$correct" ) 
+				$success
+			;;
+		:q ) 
+				echo -e "\033[0mExit script..."
+				exit 1;
+			;;
+		:h ) 
+				about
+			;;
+		:r ) 
+				reset-dialog
+			;;
+		* ) 
+				$error
+			;;
+	esac
+}
+
+# display about message
+about() {
+	cat <<EOF
+        Usage: interactive.sh [options]
+        
+        Description:
+            interactive-shell is a small cli app,
+            that allow you to learn basics of UNIX commands
+            quickly and interactively
+
+        Authors:
+        	Oleh Kuchuk <Kuchuklehjs@gmail.com>
+        	https://github.com/drkraken
+        	and other contributors
+
+       	Version: 
+       		current: v2.0.0
+       		previous: v1.0.0
+EOF
 }
 
 finish() {
@@ -431,14 +475,27 @@ restarting() {
 	$state
 }
 
+reset-dialog() {
+	echo "Seriously, man? [y|N]"
+	read -p "  ❯ " input
+
+	case $input in
+		y|Y ) DELETE_LOG "$USER";
+			;;
+		* ) exit 1;
+			;;
+	esac
+}
+
 # inital function
 initialize() {
 
 	echo -e "$PURPURE\\n  Holla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell!"
-	echo -e "\\n  During series of short tutorials,"
+	echo -e "  During series of short tutorials,"
 	echo -e "  You will learn basics of working with your shell"
-	echo -e "\\n  So, Lets start!  $RESET\\n"
-	echo -e "Type :q when you would like to exit script or :h for view script version  $RESET"
+	echo -e "  So, Lets start!  $RESET"
+	echo -e "  \\n  $(type_echo 'Type') \\n  $(term_echo ':q') when you would like to exit script \\n  $(term_echo ':h') for view about message  $RESET"
+	echo -e "  $(term_echo ':r') if you want to reset your score  $RESET"
 
 	success() {
 		local state=$1
