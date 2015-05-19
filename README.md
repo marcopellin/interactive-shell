@@ -38,6 +38,8 @@ If you accidentally leave the script, don't be afraid, the script will save all 
 - Create clean documentation for commands
 - Add more exercises
 - Add script alternative for ```cmd```
+- Translate
+- Make <kbd>tab</kbd> completion work
 
 License: MIT
 
