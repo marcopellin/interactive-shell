@@ -111,7 +111,7 @@ READ_LOG() {
 			done < "$filename"
 
 		else
-			error_echo "uncorrect user name"
+			error_echo "incorrect user name"
 		fi
 	else
 		error_echo "None for user name"
@@ -608,9 +608,9 @@ finish() {
 restarting() {
 
 	local state=$1
-	error_echo " ----------------------------------"
-	error_echo "| Uncorrect input, please try again |"
-	error_echo " ----------------------------------"
+	error_echo "+-----------------------------------+"
+	error_echo "| incorrect input, please try again |"
+	error_echo "+-----------------------------------+"
 	$state
 }
 
