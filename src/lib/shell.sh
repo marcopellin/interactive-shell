@@ -7,7 +7,7 @@ mkdirExercise() {
 	local correct="mkdir firstFolder"
 
 	type_echo "Type 'mkdir firstFolder'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		mkdir ./firstFolder
@@ -34,7 +34,7 @@ cdExercise() {
 
 	success_echo "Cool! We have folder lets move into in"
 	type_echo "Type 'cd firstFolder'"
-	read -p "  ->  " input;
+	read -e -p "  ->  " input;
 
 	success() {
 		cd ./firstFolder
@@ -58,7 +58,7 @@ touchExercise() {
 
 	echo "Lets create one file in this folder"
 	type_echo "\033[0;36mType 'touch sample.txt'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Cool"
@@ -84,7 +84,7 @@ rmExercise() {
 	echo "Lets learn how to delete files"
 	echo "Lets delete sample.txt , that we create earlier"
 	type_echo "\033[0;36mType 'rm sample.txt'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Cool. You made it!"
@@ -109,7 +109,7 @@ pwdExercise() {
 	echo "you can type pwd command that display your current full path"
 	echo "Lets try it"
 	type_echo "Type 'pwd'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		echo "Your path : $(pwd)"
@@ -132,7 +132,7 @@ cpExercise() {
 
 	echo "Lets try cp command,"
 	type_echo "Type 'cp sample.txt sample-copy.txt'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		cp sample.txt sample-copy.txt
@@ -157,7 +157,7 @@ mvExercise() {
 	echo "Lets try $(term_echo 'mv') command"
 	echo "Lets create new folder and move our file into that"
 	type_echo "Type 'mkdir testFolder; mv sample.txt ./testFolder'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		mkdir ./testFolder; mv sample.txt ./testFolder
@@ -182,7 +182,7 @@ sudoTraining() {
 	echo "If you want to run command as a super user you can use $(term_echo 'sudo') command"
 	echo "Let enter a super user mode"
 	type_echo "Type 'sudo su'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Yeh. All right!"
@@ -208,7 +208,7 @@ dateExercise() {
 	echo "$(term_echo 'date') command is used for operate different date formats"
 	echo "Lets learn it"
 	type_echo "Type: date && date +'%d/%m/%Y'"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Yeh. All right!"
@@ -233,7 +233,7 @@ lsTraining() {
 	echo "$(term_echo 'ls') command is used for showing which files current directory have"
 	echo "Lets try it"
 	type_echo "Type: ls ."
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Yeh. All right!"
@@ -258,7 +258,7 @@ psTraining() {
 	echo "$(term_echo 'ps') command display a list of running processes"
 	echo "Lets try"
 	type_echo "Type: ps"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Cool!"
@@ -283,7 +283,7 @@ nanoTraining() {
 	echo "Lets discover it."
 	type_echo "Type: nano"
 	type_echo "When you want to leave edit simple press $(term_echo 'Ctrl+X') . Than you can save or not your changes."
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	success() {
 		success_echo "Cool!"
@@ -323,7 +323,11 @@ checkInput() {
 		echo -e "\033[0mExit script..."
 		exit 0;
 	elif [ "$input" = ":h" ]; then
-		echo -e "\033[0mauthor: Oleh Kuchuk version: 1.0"
+		echo -e "\033[0mauthor: Marco Pellin version: 1.0"
+	elif [ "$input" = ":restart" ]; then
+		success_echo "restarting game..."
+		DELETE_LOG "$USER";
+		next "initialize"
 	else
 		$error
 	fi
@@ -335,7 +339,7 @@ finish() {
 
 	success_echo "End of game... type $(term_echo ':restart') $(success_echo 'for restarting game.')"
 	error_echo "Note that all scores will be reset!"
-	read -p "  -> " input
+	read -e -p "  -> " input
 
 	if [ "$input" = ":restart" ]; then
 		success_echo "restarting game..."
@@ -360,7 +364,7 @@ initialize() {
 	echo -e "\033[1;35mHolla, \033[0;33m$USER!\033[1;35m Welcome to interactive shell! \033[0m"
 	echo -e "\033[1;35mDuring series of short tutorials you will learn basics of working with your shell"
 	echo -e "So, Lets start!  \033[0m"
-	echo -e "Type :q when you would like to exit script or :h for view script version  \033[0m"
+	echo -e "Type\n :q when you would like to exit script\n :h for view script version\n :restart to clear history and begin a new game  \033[0m"
 
 	success() {
 		local state=$1
