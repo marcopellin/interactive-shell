@@ -1,4 +1,5 @@
 
+states=(initialize mkdirExercise cdExercise touchExercise rmExercise pwdExercise cpExercise mvExercise sudoTraining dateExercise lsTraining psTraining nanoTraining finish)
 
 # exrcise for learning mkdir
 mkdirExercise() {
@@ -10,13 +11,11 @@ mkdirExercise() {
 	read -e -p "  -> " input
 
 	success() {
-		mkdir ./firstFolder
-		success_echo "\033[0;32mCongratulations! Now you create your first folder!"
+		eval $input
+		success_echo "Congratulations! Now you create your first folder!"
 		echo "$(term_echo 'mkdir') command is used for creating folders"
 		echo "So in our case we created folder with name 'firstFolder'"
-		UPDATE "cdExercise"
-		SAVE_STAT
-		next "cdExercise"
+		next
 	}
 	error() {
 		restarting "mkdirExercise"
@@ -41,7 +40,7 @@ cdExercise() {
 		success_echo "Cool. Now you in firstFolder, that you created before"
 		UPDATE "touchExercise"
 		SAVE_STAT
-		next "touchExercise"
+		next
 	}
 	error() {
 		restarting "cdExercise"
@@ -65,7 +64,7 @@ touchExercise() {
 		touch ./sample.txt
 		UPDATE "rmExercise"
 		SAVE_STAT
-		next "rmExercise"
+		next
 	}
 	error() {
 		restarting "touchExercise"
@@ -91,7 +90,7 @@ rmExercise() {
 		# rm ./sample.txt
 		UPDATE "pwdExercise"
 		SAVE_STAT
-		next "pwdExercise"
+		next
 	}
 	error() {
 		restarting "rmExercise"
@@ -116,7 +115,7 @@ pwdExercise() {
 		success_echo "Nice you made it!"
 		UPDATE "cpExercise"
 		SAVE_STAT
-		next "cpExercise"
+		next
 	}
 	error() {
 		restarting "pwdExercise"
@@ -139,7 +138,7 @@ cpExercise() {
 		success_echo "Yeh. All right!"
 		UPDATE "mvExercise"
 		SAVE_STAT
-		next "mvExercise"
+		next
 	}
 
 	error() {
@@ -164,7 +163,7 @@ mvExercise() {
 		success_echo "Yeh. All right!"
 		UPDATE "sudoTraining"
 		SAVE_STAT
-		next "sudoTraining"
+		next
 	}
 
 	error() {
@@ -188,7 +187,7 @@ sudoTraining() {
 		success_echo "Yeh. All right!"
 		UPDATE "dateExercise"
 		SAVE_STAT
-		next "dateExercise"
+		next
 		
 	}
 
@@ -215,7 +214,7 @@ dateExercise() {
 		date && date +'%d/%m/%Y'
 		UPDATE "finish"
 		SAVE_STAT
-		next "lsTraining"
+		next
 	}
 
 	error() {
@@ -241,7 +240,7 @@ lsTraining() {
 		echo "If you want to show hidden files you can use flag -a like ls -a . This command will show files with hidden files too"
 		UPDATE "lsTraining"
 		SAVE_STAT
-		next "psTraining"
+		next
 	}
 
 	error() {
@@ -265,7 +264,7 @@ psTraining() {
 		ps
 		UPDATE "psTraining"
 		SAVE_STAT
-		next "nanoTraining"
+		next
 	}
 
 	error() {
@@ -291,7 +290,7 @@ nanoTraining() {
 		success_echo "You made it!"
 		UPDATE "nanoTraining"
 		SAVE_STAT
-		next "finish"
+		next
 	}
 
 	error() {
@@ -303,9 +302,10 @@ nanoTraining() {
 
 # loading next state
 next() {
-
-	local state=$1
-	$state
+	UPDATE "$state"
+	SAVE_STAT
+	local state=$(( $state + 1 ))
+	${states[$state]}
 }
 
 # checking user input
@@ -327,7 +327,8 @@ checkInput() {
 	elif [ "$input" = ":restart" ]; then
 		success_echo "restarting game..."
 		DELETE_LOG "$USER";
-		next "initialize"
+		local state="-1"
+		next
 	else
 		$error
 	fi
@@ -344,7 +345,8 @@ finish() {
 	if [ "$input" = ":restart" ]; then
 		success_echo "restarting game..."
 		DELETE_LOG "$USER";
-		next "initialize"
+		local state="-1"
+		next
 	else
 		success_echo "exiting..."
 	fi
@@ -368,13 +370,17 @@ initialize() {
 
 	success() {
 		local state=$1
+		if ! [[ $1 =~ ^[0-9]+$ ]]
+		then
+			local state="0"
+		fi
 		success_echo "Resuming latest game state ... "
-		next "$state"
+		next
 	}
 
 	error() {
 		CREATE_USER "$USER"
-		next "mkdirExercise"
+		next
 	}
 
 	CHECK_LOG "$USER" success error

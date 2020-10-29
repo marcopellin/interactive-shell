@@ -19,7 +19,7 @@ CREATE_USER() {
 	if [ "$2" ]; then
 		progress="$2"
 	else
-		progress="null"
+		progress="-1"
 	fi
 }
 
