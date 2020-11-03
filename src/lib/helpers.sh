@@ -1,26 +1,34 @@
 #!/bin/bash
 
+GREEN="\033[0;32m"
+RESET="\033[0m"
+ALERT="\033[0;31m"
+YELLOW="\033[1;33m"
+DARKBLUE="\033[0;36m"
+LINK="\033[0;34m"
+PURPURE="\033[1;35m"
+
 # print success helper
 success_echo() {
 	local text=$1
-	echo -e "\n------------------\n\033[0;32m$text\033[0m"
+	echo -e "\n$GREEN$text$RESET"
 }
 
 # print error message helper
 error_echo() {
 	local text=$1
-	echo -e "\n\033[0;31m$text\033[0m"
+	echo -e "\n$ALERT$text$RESET"
 }
 
 # print term message helper
 term_echo() {
 	local text=$1
-	echo -e "\n\033[1;33m$text\033[0m"
+	echo -e "$YELLOW$text$GREEN"
 }
 
 type_echo() {
 	local text=$1
-	echo -e "\n\033[0;36m$text\033[0m"
+	echo -e "\n$DARKBLUE$text$RESET"
 }
 
 # end
