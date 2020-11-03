@@ -42,16 +42,17 @@ UPDATE() {
 	fi
 }
 
-# save statistic to ol file
+# save statistic to log file
 SAVE_STAT() {
 
 	local FILE="$HOME/.loger-$user.log"
-	for f in $FILE; do
-		echo "$date" > $FILE
-		echo "$user" >> "$FILE"
-		echo "$shell" >> $FILE
-		echo "$progress" >> "$FILE"
-	done
+
+	{
+		echo "$date"
+		echo "$user"
+		echo "$shell"
+		echo "$progress"
+	} > "$FILE"
 }
 
 READ_LOG() {
@@ -89,7 +90,7 @@ CHECK_LOG() {
 
 DELETE_LOG() {
 	local username=$1
-	rm $HOME/.loger-$username.log
+	rm "$HOME/.loger-$username.log"
 }
 
 # end

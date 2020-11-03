@@ -76,16 +76,17 @@ UPDATE() {
 	fi
 }
 
-# save statistic to ol file
+# save statistic to log file
 SAVE_STAT() {
 
 	local FILE="$HOME/.loger-$user.log"
-	for f in $FILE; do
-		echo "$date" > $FILE
-		echo "$user" >> "$FILE"
-		echo "$shell" >> $FILE
-		echo "$progress" >> "$FILE"
-	done
+
+	{
+		echo "$date"
+		echo "$user"
+		echo "$shell"
+		echo "$progress"
+	} > "$FILE"
 }
 
 READ_LOG() {
@@ -123,7 +124,7 @@ CHECK_LOG() {
 
 DELETE_LOG() {
 	local username=$1
-	rm $HOME/.loger-$username.log
+	rm "$HOME/.loger-$username.log"
 }
 
 # end
@@ -138,10 +139,10 @@ helloWorldExercise() {
 
 	type_echo "Hello! Would you like to say something?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Welcome on board!"
 		success_echo "$(term_echo 'echo') command is used for displaying a line of text."
 		next
@@ -162,10 +163,10 @@ dateExercise() {
 
 	type_echo "Do you know what time is it?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Thank you! Now I know what time and date it is."
 		success_echo "$(term_echo 'date') command is used for printing or setting the system date and time."
 		next
@@ -187,10 +188,10 @@ timeExercise() {
 	type_echo "I previously asked what time is it."
 	type_echo "Can you please print out the time only?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Thanks!"
 		success_echo "$(term_echo 'date') command can be used with some arguments to print the current time in the given format."
 		next
@@ -212,10 +213,10 @@ manExercise() {
 	type_echo "If you want to learn more about some commands, type $(term_echo 'man') followed by the name of the command."
 	type_echo "Let's try this with $(term_echo 'date')."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "I bet you barely read a couple of lines! Yeah, it was boring,"
 		success_echo "but keep the $(term_echo 'man') command in mind!"
 		next
@@ -237,10 +238,10 @@ whatisExercise() {
 	type_echo "What if we want to know briefly what a command may be used for?"
 	type_echo "Here it comes the $(term_echo 'whatis') command!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Simple but effective!"
 		success_echo "$(term_echo 'whatis') command displays one-line manual page descriptions."
 		next
@@ -262,10 +263,10 @@ whoamiExercise() {
 	type_echo "So now we know WHEN we are."
 	type_echo "But do you know WHO are you?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Excellent!"
 		success_echo "$(term_echo 'whoami') command prints the effective userid."
 		next
@@ -286,10 +287,10 @@ pwdExercise() {
 
 	type_echo "Next step is to know WHERE we are."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, here we are!"
 		success_echo "$(term_echo 'pwd') command prints the name of the current/working directory."
 		next
@@ -314,10 +315,10 @@ mkdirExercise() {
 	type_echo "I mean, inside the \"office\" folder!"
 	type_echo "First, let's create it in here."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Cool, you just created a new folder!"
 		success_echo "$(term_echo 'mkdir') command is used to make directories."
 		next
@@ -339,10 +340,10 @@ cdExercise() {
 	type_echo "I said we should go there now."
 	type_echo "To do it we should Change Directory!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, we moved inside the office folder."
 		success_echo "$(term_echo 'cd') command is used to Change the current/working Directory."
 		next
@@ -359,7 +360,7 @@ cdExercise() {
 mkdirParentExercise() {
 
 	# for resume
-	#[ "$(basename $(pwd))" != "office" ] && mkdir office && cd office
+	#[ "$(basename "$(pwd)")" != "office" ] && mkdir office && cd office
 
 	local input
 	local correct="mkdir -p firstFloor/toilet"
@@ -367,10 +368,10 @@ mkdirParentExercise() {
 	type_echo "Ehm, sorry, I have to go to the toilet in the first floor."
 	type_echo "Can you please make it first?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Nice, I see it is there now!"
 		success_echo "$(term_echo 'mkdir -p') command makes the full set of nested directories."
 		success_echo "In this example it made the toilet inside the firstFloor"
@@ -388,7 +389,7 @@ mkdirParentExercise() {
 cdPathExercise() {
 
 	# for resume
-	#[ "$(basename $(pwd))" != "office" ] && mkdir office && cd office
+	#[ "$(basename "$(pwd)")" != "office" ] && mkdir office && cd office
 	#mkdir -p firstFloor/toilet
 
 	local input
@@ -396,10 +397,10 @@ cdPathExercise() {
 
 	type_echo "So, please, let's move in the toilet!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Thank you!"
 		echo ""
 		success_echo "Ehm..I'll be back soon!"
@@ -426,17 +427,17 @@ cdMinusExercise() {
 
 	# for resume
 	#OLDPWD=$pwd/office
-	#[ "$(basename $(pwd))" != "toilet" ] && mkdir firstFloor/toilet && cd firstFloor/toilet
+	#[ "$(basename "$(pwd)")" != "toilet" ] && mkdir firstFloor/toilet && cd firstFloor/toilet
 
 	local input
 	local correct="cd -"
 
 	type_echo "Thanks. Let's go back to the office!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, here we are again!"
 		success_echo "$(term_echo 'cd -') command let you move back to the previous directory."
 		next
@@ -458,10 +459,10 @@ lsExercise() {
 	type_echo "Now we need a paper. Yeah, a file called paper."
 	type_echo "Let's check what we have in here."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Oh, we have just an empty office and a first floor."
 		next
 	}
@@ -481,10 +482,10 @@ echoFileExercise() {
 
 	type_echo "You know what? We will create an empty paper in the office!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes! Here it is!"
 		success_echo "Oh, can't you see it yet?"
 		next
@@ -505,10 +506,10 @@ lsListExercise() {
 
 	type_echo "Please, check if the file is in there."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "It was right there,"
 		success_echo "and with $(term_echo 'ls -l') command you can even check when the file has been modified."
 		next
@@ -531,10 +532,10 @@ mvExercise() {
 	type_echo "I left outside, in the backpack in my car, a letter that I need for the next exercises."
 	type_echo "Can you please take it in here for me?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Thank you so much!"
 		success_echo "$(term_echo 'mv') command moves files from one directory to the other."
 		success_echo "Please note that the dot we used in the end of the $(term_echo 'mv') command means HERE."
@@ -556,10 +557,10 @@ catFileExercise() {
 
 	type_echo "Let's have a look at it!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, we printed here the content of the file."
 		success_echo "$(term_echo 'cat') command print files content on the standard output."
 		next
@@ -580,10 +581,10 @@ headExercise() {
 
 	type_echo "Now we should print the first line of the letter on our empty paper"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Let me show the content:"
 		cat paper
 		success_echo "$(term_echo 'head') command let you output the first part of files."
@@ -605,10 +606,10 @@ tailExercise() {
 
 	type_echo "Now we should print the last two lines of the letter on our paper"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Let me show the content:"
 		cat paper
 		success_echo "$(term_echo 'tail') command let you output the last part of files."
@@ -631,10 +632,10 @@ appendExercise() {
 	type_echo "We used a double \"greater than\" sign (>>)! This means \"append\"."
 	type_echo "Let's try it with $(term_echo 'echo')"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Let me show the content:"
 		cat paper
 		success_echo "As you can see we append it to the end of the file."
@@ -655,10 +656,10 @@ overrideExercise() {
 
 	type_echo "What if we use a single \"greater than\" sign (>)?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Let me show the content:"
 		cat paper
 		success_echo "As you can see the content has been fully replaced by the new text."
@@ -682,10 +683,10 @@ lsMoreExercise() {
 
 	type_echo "Can you please check if there are other letters in my backpack?"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "It seems empty, huh?"
 		next
 	}
@@ -707,10 +708,10 @@ lsHiddenExercise() {
 
 	type_echo "I will tell you a secret: you can search for hidden files."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Have you found it now?"
 		success_echo "Remember: $(term_echo 'ls -a') let you see all files, even the hidden ones"
 		next
@@ -733,10 +734,10 @@ hideFilesExercise() {
 	type_echo "It seems that the dot at the beginning of the name has something to do with that."
 	type_echo "Let's try to hide our paper!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes! Let me show you!"
 		success_echo "$(term_echo 'ls -l')"
 		ls -l
@@ -762,10 +763,10 @@ rmFilesExercise() {
 	type_echo "We don't need the secret_paper anymore. Please burn it!"
 	type_echo "Errm, remove it!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Well done! The file is gone. Let me show you!"
 		success_echo "$(term_echo 'ls -l')"
 		ls -l
@@ -793,10 +794,10 @@ touchExercise() {
 	type_echo "We previously used the $(term_echo 'echo') command."
 	type_echo "Let's try a new one."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Thank you!"
 		success_echo "$(term_echo 'touch') command creates an empty file if not existing."
 		next
@@ -817,10 +818,10 @@ findExercise() {
 
 	type_echo "Let search for the toilet paper from here."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, here it is!"
 		success_echo "$(term_echo 'find') command searches for files in a directory hierarchy."
 		next
@@ -843,10 +844,10 @@ findDeleteExercise() {
 	type_echo "We previously used the $(term_echo 'rm') command."
 	type_echo "Let's try a new one."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Yes, in one line you can search for some files and delete them!"
 		success_echo "BE CAREFUL! No confirmation is asked before the removal!"
 		next
@@ -868,10 +869,10 @@ grepExercise() {
 	type_echo "Do you know if somewhere is written the words \"very long\"?"
 	type_echo "$(term_echo 'find') won't work in this case!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 		success_echo "Excellent! You found it!"
 		success_echo "$(term_echo 'grep') command prints lines matching a pattern."
 		next
@@ -887,7 +888,7 @@ grepExercise() {
 #gedit
 geditExercise() {
 
-	currentFolder=$( basename $(pwd) )
+	currentFolder=$( basename "$(pwd)" )
 	if [ "$currentFolder" != "office" ]
 	then
 		mkdir office
@@ -901,17 +902,16 @@ geditExercise() {
 	type_echo "You will use a text editor for that."
 	type_echo "Remember to save before closing the editor!"
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 
-		read -p "Press enter to let me know that you're done!"
+		read -r -p "Press enter to let me know that you're done!"
 
 		success_echo "I see you used the text editor"
 
-		head -4 letter | tail -1 | grep "Files can be very short." letter -q
-		if [ $? -eq 0 ]
+		if head -4 letter | tail -1 | grep "Files can be very short." letter -q
 		then
 			success_echo "and the requested change is there!"
 			next
@@ -932,7 +932,7 @@ geditExercise() {
 #nano
 nanoExercise() {
 
-	currentFolder=$( basename $(pwd) )
+	currentFolder=$( basename "$(pwd)" )
 	if [ "$currentFolder" != "office" ]
 	then
 		mkdir office
@@ -946,17 +946,16 @@ nanoExercise() {
 	type_echo "You won't use $(term_echo 'gedit') now, but the more simpler $(term_echo 'nano')"
 	type_echo "When you want to leave edit simple press $(term_echo 'Ctrl+X') and follow the prompt on screen."
 	type_echo "Type '$correct'"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	success() {
-		eval $input
+		eval "$input"
 
-		read -p "Press enter to let me know that you're done!"
+		read -r -p "Press enter to let me know that you're done!"
 
 		success_echo "I see you used the text editor"
 
-		head -3 letter | tail -1 | grep "And so on, word by word." letter -q
-		if [ $? -eq 0 ]
+		if head -3 letter | tail -1 | grep "And so on, word by word." letter -q
 		then
 			success_echo "and the requested change is there!"
 			next
@@ -977,7 +976,7 @@ nanoExercise() {
 progressBar() {
 
 	progress=$(( ${state}00 /$(( ${#states[@]} - 1 )) / 4 ))
-	empty=$(( 25 - $progress ))
+	empty=$(( 25 - progress ))
 
 	echo -e "\033[2m"
 	echo -n "["
@@ -1000,7 +999,7 @@ progressBar() {
 next() {
 	UPDATE "$state"
 	SAVE_STAT
-	local state=$(( $state + 1 ))
+	local state=$(( state + 1 ))
 	progressBar
 	${states[$state]}
 }
@@ -1040,7 +1039,7 @@ finish() {
 	success_echo "Yes! You completed the game!"
 	success_echo "type $(term_echo ':restart') for restarting game."
 	error_echo "Note that all scores will be reset!"
-	read -e -p "  -> " input
+	read -r -e -p "  -> " input
 
 	if [ "$input" = ":restart" ]; then
 		success_echo "restarting game..."
